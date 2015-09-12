@@ -1,0 +1,15 @@
+{
+  "libs": [
+    "browser",
+    "ecma5",
+    "ecma6"
+  ],
+  "plugins": {
+    "complete_strings": {},
+    "node": {},
+    "lint": {},
+    "doc_comment": {
+      "fullDocs": true
+    }
+  }
+}
