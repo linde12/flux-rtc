@@ -1,3 +1,6 @@
+{{#if peerId || messages.length > 0}}
+  RoomID: {{peerId}}<br />
+{{/if}}
 Messages: <br />
 {{#each messages}}
   {{.}}<br />

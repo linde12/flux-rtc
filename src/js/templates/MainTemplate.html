@@ -1,9 +1,5 @@
 {{#if peerId}}
   PeerID: {{peerId}}<br />
 {{/if}}
-{{#if roomId || messages.length > 0}}
-  RoomID: {{roomId}}<br />
-  <ChatComponent />
-{{else}}
-  <ConnectComponent />
-{{/if}}
+<ConnectComponent />
+<ChatComponent />
