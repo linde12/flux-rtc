@@ -1,6 +1,6 @@
 import Ractive from 'ractive';
 import Template from '../templates/ChatTemplate.html';
-import Peer from 'peerjs';
+import Peer from '../util/Peer';
 
 let Component = Ractive.extend({
   template: Template,
@@ -10,38 +10,40 @@ let Component = Ractive.extend({
         if (evt.original.keyCode === 13) {
           let message = this.get('message');
           this.push('messages', message);
-          this.sendMessage(message);
+          if (message === 'dc') {
+            this.peer.disconnect();
+          }
+          this.peer.sendAll(message);
           this.set('message', '');
         }
       }
     });
 
     this.peer = new Peer({key: 'tv3jrgxh5aeb3xr'});
+    this.peer.listen();
     this.peer.on('open', (id) => {
       this.set('peerId', id);
     });
 
-    this.peer.on('connection', (conn) => {
-      this.connection = conn;
-      this.push('messages', conn.id + ' has connected.');
-      this.push('connections', conn);
+    if (window.location.hash !== '') {
+      this.peer.connect(window.location.hash.replace('#', ''));
+    }
 
-      conn.on('data', (data) => {
-        console.log(data);
-        this.push('messages', data);
-        this.update();
-        console.log(this.get());
+    this.peer.on('Message', (data) => {
+      this.push('messages', data);
+    });
+
+    this.peer.on('PeerList', (peers) => {
+      peers.forEach((peerId) => {
+        this.push('peers', peerId);
       });
     });
 
-    if (window.location.hash !== '') {
-      this.connection = this.peer.connect(
-        window.location.hash.replace('#', ''));
-      this.connection.on('open', () => {
-        console.log(arguments);
-        this.connection.send('Hello world!');
-      });
-    }
+    this.peer.on('RemovePeer', (peer) => {
+      let peers = this.get('peers');
+      peers.splice(peers.indexOf(peer), 1);
+      this.merge('peers', peers);
+    });
   },
   data() {
     return  {
@@ -49,11 +51,8 @@ let Component = Ractive.extend({
       messages: [],
       roomId: '',
       peerId: '',
-      connections: []
+      peers: []
     };
-  },
-  sendMessage (message) {
-    this.connection.send(message);
   }
 });
 

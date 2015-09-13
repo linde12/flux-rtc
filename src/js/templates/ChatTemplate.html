@@ -6,4 +6,9 @@ Messages: <br />
   {{.}}<br />
 {{/each}}
 <br /><br />
+Peers: <br />
+{{#each peers}}
+  {{.}}<br />
+{{/each}}
+<br /><br />
 Message: <input type="text" on-keydown="text" value="{{message}}" />

@@ -14,9 +14,7 @@ new Ractive({
   },
   data () {
     return {
-      roomId: window.location.hash,
-      messages: [],
-      connections: []
+      hash: window.location.hash.replace('#', '')
     };
   },
   el: 'main'

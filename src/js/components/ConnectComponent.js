@@ -6,7 +6,7 @@ let Component = Ractive.extend({
   oninit: function () {
     this.on({
       connect: function () {
-        window.location.href += '#' + this.get('peerId');
+        window.location.href = '#' + this.get('peerId');
         window.location.reload();
       }
     });
