@@ -8,8 +8,23 @@ Messages: <br />
 <br /><br />
 Peers: <br />
 {{#each peers}}
-  {{.}}<br />
+  {{id}}<br />
 {{/each}}
 <br /><br />
 Message: <input type="text" on-keydown="text" value="{{message}}" />
-<input type="file" value="Select file" />
+
+<select id="selectedPeer">
+  <option value="" disabled>No peer selected</option>
+  {{#each peers}}
+    <option value="{{id}}">{{id}}</option>
+  {{/each}}
+</select>
+<input on-change="fileSelected" type="file" id="fileinput" value="Select file" />
+
+{{#if transferPercentage !== 0}}
+  <div style="height: 20px;width:{{Math.round(transferPercentage)}}%;background:green;"></div>
+{{/if}}
+
+{{#each files}}
+  File: <a href="{{href}}" download="{{name}}">{{name}}</a>
+{{/each}}
