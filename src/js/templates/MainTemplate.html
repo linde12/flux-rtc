@@ -1,4 +1,5 @@
 {{#if !hash}}
-  <ConnectComponent /><br /><br />
+  <input on-keyup="input" type="text" placeholder="Room name" value="{{roomName}}" />
+{{else}}
+  <ChatComponent />
 {{/if}}
-<ChatComponent />

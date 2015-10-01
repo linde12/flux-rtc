@@ -1,10 +1,10 @@
 import Ractive from 'ractive';
 import Template from '../templates/ChatTemplate.html';
-import Peer from '../util/Peer';
+import WebRTC from '../util/WebRTC';
 
 let Component = Ractive.extend({
   template: Template,
-  oninit() {
+  oninit () {
     this.on({
       text: (evt) => {
         if (evt.original.keyCode === 13) {
@@ -19,33 +19,14 @@ let Component = Ractive.extend({
       }
     });
 
-    this.peer = new Peer({key: 'tv3jrgxh5aeb3xr'});
-    this.peer.listen();
-    this.peer.on('open', (id) => {
-      this.set('peerId', id);
-    });
-
-    if (window.location.hash !== '') {
-      this.peer.connect(window.location.hash.replace('#', ''));
-    }
-
-    this.peer.on('Message', (data) => {
-      this.push('messages', data);
-    });
-
-    this.peer.on('PeerList', (peers) => {
-      peers.forEach((peerId) => {
-        this.push('peers', peerId);
-      });
-    });
-
-    this.peer.on('RemovePeer', (peer) => {
-      let peers = this.get('peers');
-      peers.splice(peers.indexOf(peer), 1);
-      this.merge('peers', peers);
+    WebRTC.on('readyToCall', function () {
+      WebRTC.joinRoom(window.location.hash);
+      setTimeout(() => {
+        console.log(WebRTC.getPeers());
+      }, 3000);
     });
   },
-  data() {
+  data () {
     return  {
       message: '',
       messages: [],

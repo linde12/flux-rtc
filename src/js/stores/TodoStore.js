@@ -12,7 +12,7 @@ function addItem(title, completed=false) {
 }
 
 // Facebook style store creation.
-const TodoStore = assign({}, BaseStore, {
+const Store = assign({}, BaseStore, {
   // public methods used by Controller-View to operate on data
   getAll() {
     return {
@@ -32,7 +32,7 @@ const TodoStore = assign({}, BaseStore, {
         // For details, see: http://facebook.github.io/react/blog/2014/07/30/flux-actions-and-the-dispatcher.html#why-we-need-a-dispatcher
         if (text !== '') {
           addItem(text);
-          TodoStore.emitChange();
+          Store.emitChange();
         }
         break;
 
@@ -41,4 +41,4 @@ const TodoStore = assign({}, BaseStore, {
   })
 });
 
-export default TodoStore;
+export default Store;
