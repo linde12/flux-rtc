@@ -1,1 +1,1 @@
-web: harp server ./dist --port 3000
+web: harp server ./dist --port $PORT
