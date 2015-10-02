@@ -18,7 +18,8 @@
   },
   "scripts": {
     "dev": "gulp --type dev",
-    "start": "gulp",
+    "start": "cd dist; python -m SimpleHTTPServer",
+    "postinstall": "gulp build",
     "build": "gulp build"
   },
   "dependencies": {
