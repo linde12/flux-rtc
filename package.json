@@ -24,11 +24,12 @@
   },
   "dependencies": {
     "babel-eslint": "^3.1.20",
-    "gulp": "^3.8.7",
     "eslint": "^0.24.0",
     "flux": "^2.0.3",
+    "gulp": "^3.8.7",
     "object-assign": "^3.0.0",
     "ractive": "^0.7.3",
+    "require-dir": "^0.3.0",
     "simplewebrtc": "^1.19.1",
     "stringify": "^3.1.0"
   }
