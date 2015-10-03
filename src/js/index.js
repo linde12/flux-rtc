@@ -20,7 +20,8 @@ new Ractive({
   data () {
     return {
       hash: window.location.hash.replace('#', ''),
-      roomName: ''
+      roomName: '',
+      documentTitle: 'Start Page'
     };
   },
   el: 'main'
