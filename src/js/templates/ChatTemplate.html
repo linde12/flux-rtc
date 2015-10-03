@@ -1,30 +1,40 @@
-{{#if peerId || messages.length > 0}}
-  RoomID: {{peerId}}<br />
-{{/if}}
-Messages: <br />
-{{#each messages}}
-  {{.}}<br />
-{{/each}}
-<br /><br />
-Peers: <br />
-{{#each peers}}
-  {{id}}<br />
-{{/each}}
-<br /><br />
-Message: <input type="text" on-keydown="text" value="{{message}}" />
+<div class="pure-u-1 pure-u-xl-2-3 chat-wrapper">
 
-<select id="selectedPeer">
-  <option value="" disabled>No peer selected</option>
-  {{#each peers}}
-    <option value="{{id}}">{{id}}</option>
+  {{#if peerId || messages.length > 0}}
+    RoomID: {{peerId}}<br />
+  {{/if}}
+  Messages: <br />
+  {{#each messages}}
+    {{.}}<br />
   {{/each}}
-</select>
-<input on-change="fileSelected" type="file" id="fileinput" value="Select file" />
+  <br /><br />
+  Peers: <br />
+  {{#each peers}}
+  <div class="peer-container">
+    <div class="id"> {{id}} </div>
+    <div class="buttons">
+      <button><i class="ion-ios-mic-outline"></i></button>
+      <button><i class="ion-ios-chatboxes-outline"></i></button>
+      <button><i class="ion-ios-cloud-upload-outline"></i></button>
+    </div>
+  </div>
+  {{/each}}
+  <br /><br />
+  Message: <input type="text" on-keydown="text" value="{{message}}" />
 
-{{#if transferPercentage !== 0}}
-  <div style="height: 20px;width:{{Math.round(transferPercentage)}}%;background:green;"></div>
-{{/if}}
+  <select id="selectedPeer">
+    <option value="" disabled>No peer selected</option>
+    {{#each peers}}
+      <option value="{{id}}">{{id}}</option>
+    {{/each}}
+  </select>
+  <input on-change="fileSelected" type="file" id="fileinput" value="Select file" />
 
-{{#each files}}
-  File: <a href="{{href}}" download="{{name}}">{{name}}</a>
-{{/each}}
+  {{#if transferPercentage !== 0}}
+    <div style="height: 20px;width:{{Math.round(transferPercentage)}}%;background:green;"></div>
+  {{/if}}
+
+  {{#each files}}
+    File: <a href="{{href}}" download="{{name}}">{{name}}</a>
+  {{/each}}
+</div>

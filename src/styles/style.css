@@ -1,0 +1,70 @@
+body {
+    background: #ECF0F1;
+}
+
+.start-room-wrapper {
+    display: block;
+    margin: 30vh auto;
+    text-align: center;
+}
+
+.chat-wrapper {
+    font-style: 'Work Sans', sans-serif;
+    display: block;
+    margin: 5em auto;
+    text-align: center;
+}
+
+h1, h2 {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+.start-room-wrapper input[type="text"] {
+    padding: 0.3em;
+    font-size: 1.5em;
+    background-color: #2C3E50;
+    color: white;
+    border: none;
+}
+
+.room-input-container {
+    display: inline-block;
+    padding: 0.4em;
+    border-radius: 5px;
+    background-color: #2C3E50;
+    box-shadow: 1px 1px 5px -1px #999;
+    color: white;
+    max-width: 370px;
+}
+
+.room-input-container > button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3em;
+    padding: 0;
+    position: relative;
+    top: 0.2em;
+    margin: -0.5em 0;
+}
+
+.start-room-wrapper input[type="text"]::-webkit-input-placeholder {
+   color: #ddd;
+}
+
+.start-room-wrapper input[type="text"]::-moz-input-placeholder {
+   color: #ddd;
+}
+
+
+.start-room-wrapper input[type="text"]:focus, button:focus {
+    outline: 0;
+    border-color: #2980B9;
+}
