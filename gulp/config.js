@@ -21,6 +21,10 @@ module.exports = {
       imagePath: '/images' // Used by the image-url helper
     }
   },
+  fonts: {
+    src: src + '/fonts/**/*',
+    dest: dest + '/fonts'
+  },
   browserify: {
     settings: {
       transform: ['stringify', 'babelify']
