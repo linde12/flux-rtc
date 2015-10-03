@@ -1,6 +1,7 @@
 import Ractive from 'ractive';
 import Template from '../templates/ChatTemplate.html';
 import SimpleWebRTC from 'simplewebrtc';
+import DesktopNotification from '../util/notify';
 
 let Component = Ractive.extend({
   template: Template,
@@ -14,6 +15,10 @@ let Component = Ractive.extend({
     });
 
     this.webRtc.on('createdPeer', () => {
+      new DesktopNotification({
+        title: 'Peer connected',
+        body: 'A peer has connected to #' + this.get('hash')
+      });
       this.set('peers', this.webRtc.getPeers());
     });
 
@@ -46,12 +51,12 @@ let Component = Ractive.extend({
         }
       },
 
-      fileSelected () {
-        var file = this.nodes.fileinput.files[0],
+      fileSelected (evt, id) {
+        var file = evt.node.files[0],
           peer;
 
         peer = this.get('peers').find((peer) => {
-          if (peer.id === this.nodes.selectedPeer.value) {
+          if (peer.id === id) {
             return true;
           }
         });

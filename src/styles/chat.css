@@ -30,7 +30,7 @@
     float: right;
 }
 
-.peer-container button {
+.peer-container label {
     background: none;
     border: none;
     font-size: 2em;
@@ -38,7 +38,11 @@
     display:inline-block;
 }
 
-.peer-container button:hover {
+.peer-container label:hover {
     color: #E74C3C;
     cursor: pointer;
+}
+
+.peer-container input[type="file"] {
+  display: none;
 }
