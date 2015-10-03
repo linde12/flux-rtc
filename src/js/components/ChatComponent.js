@@ -7,22 +7,54 @@ let Component = Ractive.extend({
   template: Template,
   oninit () {
     this.webRtc = new SimpleWebRTC({
-      autoRequestMedia: true
+      autoRequestMedia: true,
+      receiveMedia: {
+        mandatory: {
+          OfferToReceiveVideo: false
+        }
+      }
     });
 
     this.webRtc.on('readyToCall', () => {
       this.webRtc.joinRoom(this.parent.get('hash'));
     });
 
-    this.webRtc.on('createdPeer', () => {
+    this.webRtc.on('createdPeer', (peer) => {
       new DesktopNotification({
         title: 'Peer connected',
         body: 'A peer has connected to #' + this.get('hash')
       });
       this.set('peers', this.webRtc.getPeers());
+
+      peer.on('fileTransfer', (metadata, receiver) => {
+        receiver.on('progress', (bytesReceived) => {
+          let peers = this.get('peers'),
+            p = peers.find(function (p) {
+              return p.id === peer.id;
+            });
+          p.transferPercentage =
+            Math.round((bytesReceived / metadata.size) * 100);
+          this.set('peers', peers);
+        });
+
+        receiver.on('receivedFile', (file, metadata) => {
+          let peers = this.get('peers'),
+            p = peers.find(function (p) {
+              return p.id === peer.id;
+            });
+          p.transferPercentage = 0;
+          this.set('peers', peers);
+
+          this.push('files', {
+            href: URL.createObjectURL(file),
+            name: metadata.name
+          });
+          receiver.channel.close();
+        });
+      });
     });
 
-    this.webRtc.on('fileTransfer', (metadata, receiver) => {
+    /*this.webRtc.on('fileTransfer', (metadata, receiver) => {
       receiver.on('progress', (bytesReceived) => {
         this.set('transferPercentage',
           Math.round((bytesReceived / metadata.size) * 100));
@@ -36,7 +68,7 @@ let Component = Ractive.extend({
         });
         receiver.channel.close();
       });
-    });
+    });*/
 
     this.on({
       text (evt) {
@@ -70,8 +102,7 @@ let Component = Ractive.extend({
       message: '',
       messages: [],
       peers: [],
-      files: [],
-      transferPercentage: 0
+      files: []
     };
   }
 });

@@ -1,6 +1,9 @@
 <div class="pure-u-1 pure-u-xl-2-3 chat-wrapper">
   {{#each peers}}
     <div class="peer-container">
+      {{#if transferPercentage}}
+        <div style="height: 20px;width:{{transferPercentage}}%;background:green;"></div>
+      {{/if}}
       <div class="id">{{id}}</div>
       <div class="buttons">
         <label on-click="mute:{{id}}"><i class="ion-ios-mic-outline"></i></label>
@@ -10,9 +13,6 @@
       </div>
     </div>
   {{/each}}
-  {{#if transferPercentage !== 0}}
-    <div style="height: 20px;width:{{Math.round(transferPercentage)}}%;background:green;"></div>
-  {{/if}}
 
   {{#each files}}
     File: <a href="{{href}}" download="{{name}}">{{name}}</a>
