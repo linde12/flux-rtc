@@ -1,5 +1,14 @@
 {{#if !hash}}
-  <input on-keyup="input" type="text" placeholder="Room name" value="{{roomName}}" />
+
+  <div class="pure-u-1 pure-u-xl-2-3 start-room-wrapper">
+      <h1>Welcome to web chat!</h1>
+      <h2>Join or create a chat</h2>
+
+      <div class="room-input-container">
+          <input on-keyup="input" type="text" placeholder="Room name" value="{{roomName}}" />
+          <button> <i class="ion-ios-arrow-thin-right enter-icon"></i></button>
+      </div>
+  </div>
 {{else}}
   <ChatComponent />
 {{/if}}

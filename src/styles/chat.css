@@ -1,0 +1,44 @@
+.chat-wrapper {
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    margin: 5em auto;
+    text-align: center;
+}
+
+.chat-wrapper * {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.peer-container {
+    display: block;
+    background-color: #2C3E50;
+    padding:0.5em;
+    margin: 0.5em auto;
+    border-radius: 3px;
+    max-width: 500px;
+    height: 2.45em;
+}
+
+.peer-container .id {
+    float: left;
+    padding: 0.3em;
+    font-size: 1.3em;
+    color: white;
+}
+
+.peer-container .buttons {
+    float: right;
+}
+
+.peer-container button {
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: white;
+    display:inline-block;
+}
+
+.peer-container button:hover {
+    color: #E74C3C;
+    cursor: pointer;
+}
