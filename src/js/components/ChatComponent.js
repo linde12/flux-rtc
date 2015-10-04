@@ -14,9 +14,9 @@ let Component = Ractive.extend({
         }
       }
     });
-
     this.webRtc.on('readyToCall', () => {
       this.webRtc.joinRoom(this.parent.get('hash'));
+      this.set('peerId', this.webRtc.connection.getSessionid());
     });
 
     this.webRtc.on('createdPeer', (peer) => {
@@ -27,16 +27,15 @@ let Component = Ractive.extend({
       this.set('peers', this.webRtc.getPeers());
 
       peer.on('fileTransfer', (metadata, receiver) => {
-
-        this.set('fileData', metadata);
         receiver.on('progress', (bytesReceived) => {
           let peers = this.get('peers'),
             p = peers.find(function (p) {
               return p.id === peer.id;
             });
+
           p.transferPercentage =
             Math.round((bytesReceived / metadata.size) * 100);
-          p.hasFiles = true;
+          p.fileData = metadata;
           this.set('peers', peers);
         });
 
