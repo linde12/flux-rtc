@@ -27,6 +27,8 @@ let Component = Ractive.extend({
       this.set('peers', this.webRtc.getPeers());
 
       peer.on('fileTransfer', (metadata, receiver) => {
+
+        this.set('fileData', metadata);
         receiver.on('progress', (bytesReceived) => {
           let peers = this.get('peers'),
             p = peers.find(function (p) {
@@ -34,6 +36,7 @@ let Component = Ractive.extend({
             });
           p.transferPercentage =
             Math.round((bytesReceived / metadata.size) * 100);
+          p.hasFiles = true;
           this.set('peers', peers);
         });
 

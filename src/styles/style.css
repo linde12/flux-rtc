@@ -5,18 +5,12 @@
 
 body {
     background: #ECF0F1;
+    margin: 0;
 }
 
 .start-room-wrapper {
     display: block;
     margin: 30vh auto;
-    text-align: center;
-}
-
-.chat-wrapper {
-    font-style: 'Work Sans', sans-serif;
-    display: block;
-    margin: 5em auto;
     text-align: center;
 }
 

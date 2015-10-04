@@ -1,7 +1,8 @@
 .chat-wrapper {
     display: block;
     font-family: 'Work Sans', sans-serif;
-    margin: 5em auto;
+    margin: 0 auto;
+    padding: 5em 0;
     text-align: center;
 }
 
@@ -9,24 +10,29 @@
     font-family: 'Work Sans', sans-serif;
 }
 
-.peer-container {
+.peer-container, .you-container {
     display: block;
     background-color: #2C3E50;
-    padding:0.5em;
     margin: 0.5em auto;
     border-radius: 3px;
     max-width: 500px;
-    height: 2.45em;
+}
+
+.you-container {
+    background-color: #3498DB;
+    padding: 1em 0;
+    color: white;
 }
 
 .peer-container .id {
     float: left;
-    padding: 0.3em;
+    padding: 0.7em 0.5em;
     font-size: 1.3em;
     color: white;
 }
 
 .peer-container .buttons {
+    padding: 0.5em 1em;
     float: right;
 }
 
@@ -36,6 +42,7 @@
     font-size: 2em;
     color: white;
     display:inline-block;
+    padding-left:0.3em;
 }
 
 .peer-container label:hover {
@@ -46,3 +53,88 @@
 .peer-container input[type="file"] {
   display: none;
 }
+
+.peer-container .upload-bar {
+    color: white;
+    height:5px;
+    margin-bottom: -5px;
+    background: #E74C3C;
+}
+
+.peer-container .upload-container {
+    clear: both;
+    width: 100%;
+    color: white;
+}
+
+.peer-container .upload-text {
+    padding: 0.3em;
+}
+
+.peer-container .upload-text a {
+    color: white;
+    text-decoration: none;
+}
+
+.peer-container .upload-text a:hover {
+    color: #3498DB;
+    text-decoration: none;
+}
+
+.peer-container .upload-text .icon {
+    padding-left: 0.2em;
+    font-size: 1.1em;
+    position: relative;
+    top: 0.2em;
+}
+
+.message-wrapper {
+    position: relative;
+    height: 100vh;
+    background-color: #0F161F;
+    float: right;
+    overflow-y: scroll!important;
+    color: white;
+    padding: 0 1em;
+}
+
+.message-content {
+  font-family: 'Work Sans', sans-serif;
+  position: absolute;
+  bottom: 4em;
+  color: white;
+  width: 91%;
+}
+
+.message-wrapper input {
+    position: absolute;
+    bottom: 1em;
+    padding: 4%;
+    width: 84%;
+    border-radius: 3px;
+    border: none;
+}
+
+.chat-entry-you {
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 4px;
+    border: 1px solid #24A5DB;
+    background-color: #24A5DB;
+}
+
+.chat-entry-other {
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  border: 1px solid #0F75B9;
+  background-color: #0F75B9;
+}
+
+/*
+@media (max-width: 48em) {
+    .message-wrapper {
+        height:50vh;
+    }
+}
+*/

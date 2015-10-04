@@ -1,20 +1,47 @@
-<div class="pure-u-1 pure-u-xl-2-3 chat-wrapper">
+<!--<div class="message-wrapper pure-u-1 pure-u-lg-1-5">
+  <div class="message-content">
+    <div class="chat-entry-other"> hello! </div>
+    <div class="chat-entry-you"> hi! </div>
+  </div>
+
+  <input type="text" class="text" placeholder="Message..."/>
+</div>
+-->
+<div class="pure-u-1 pure-u-lg-2-3 chat-wrapper">
+  {{#if peers.length > 0}}
+    <h2>Peers connected:</h2>
+  {{else}}
+    <h2>No peers connected.</h2>
+  {{/if}}
+  <div class="you-container">
+    You (id..{{id}})
+  </div>
   {{#each peers}}
     <div class="peer-container">
-      {{#if transferPercentage}}
-        <div style="height: 20px;width:{{transferPercentage}}%;background:green;"></div>
+      {{#if transferPercentage && transferPercentage !== 0 }}
+        <div style="width:{{transferPercentage}}%;" class="upload-bar"></div>
       {{/if}}
-      <div class="id">{{id}}</div>
+
+      <div class="id"> {{id}} </div>
       <div class="buttons">
         <label on-click="mute:{{id}}"><i class="ion-ios-mic-outline"></i></label>
-        <label on-click="chat:{{id}}"><i class="ion-ios-chatboxes-outline"></i></label>
         <input on-change="fileSelected:{{id}}" type="file" id="fileupload{{id}}" value="Select file" />
         <label for="fileupload{{id}}"><i class="ion-ios-cloud-upload-outline"></i></label>
       </div>
+      <div class="upload-container">
+      {{#if transferPercentage && transferPercentage !== 0  }}
+      <div class="upload-text">
+        Downloading file {{ fileData.name }}
+      </div>
+      {{/if}}
+      {{#if hasFiles}}
+        {{#each files}}
+          <div class="upload-text">
+            <a href="{{href}}" download="{{name}}">{{name}} <i class="ion-android-arrow-down icon"></i></a>
+          </div>
+        {{/each}}
+      {{/if}}
+      </div>
     </div>
-  {{/each}}
-
-  {{#each files}}
-    File: <a href="{{href}}" download="{{name}}">{{name}}</a>
   {{/each}}
 </div>
