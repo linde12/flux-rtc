@@ -14,26 +14,36 @@ let Component = Ractive.extend({
         }
       }
     });
+
     this.webRtc.on('readyToCall', () => {
       this.webRtc.joinRoom(this.get('hash'));
       this.set('peerId', this.webRtc.connection.getSessionid());
     });
 
     this.webRtc.on('channelMessage', (peer, label, data) => {
-      if (data.type === 'setDisplayName') {
-        let peers = this.get('peers'),
-          p = peers.find(function (p) { return p.id === peer.id; });
-        p.nick = data.payload;
-        this.set('peers', peers);
-        console.log(data);
+      switch (data.type) {
+        case 'setDisplayName':
+          let peers = this.get('peers'),
+            p = peers.find(function (p) { return p.id === peer.id; });
+          p.nick = data.payload;
+          this.set('peers', peers);
+          break;
+        case 'greetings':
+          new DesktopNotification({
+            title: 'Peer connected',
+            body: 'A peer has connected to #' + this.get('hash')
+          });
+          break;
       }
     });
 
+    this.webRtc.on('joinedRoom', () => {
+      setTimeout(() => {
+        this.webRtc.sendDirectlyToAll(this.get('hash'), 'greetings', {});
+      }, 500);
+    });
+
     this.webRtc.on('createdPeer', (peer) => {
-      new DesktopNotification({
-        title: 'Peer connected',
-        body: 'A peer has connected to #' + this.get('hash')
-      });
       this.set('peers', this.webRtc.getPeers());
 
       peer.on('fileTransfer', (metadata, receiver) => {
@@ -65,22 +75,6 @@ let Component = Ractive.extend({
         });
       });
     });
-
-    /*this.webRtc.on('fileTransfer', (metadata, receiver) => {
-      receiver.on('progress', (bytesReceived) => {
-        this.set('transferPercentage',
-          Math.round((bytesReceived / metadata.size) * 100));
-      });
-
-      receiver.on('receivedFile', (file, metadata) => {
-        this.set('transferPercentage', 0);
-        this.push('files', {
-          href: URL.createObjectURL(file),
-          name: metadata.name
-        });
-        receiver.channel.close();
-      });
-    });*/
 
     this.on({
       text (evt) {
