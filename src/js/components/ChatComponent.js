@@ -15,8 +15,18 @@ let Component = Ractive.extend({
       }
     });
     this.webRtc.on('readyToCall', () => {
-      this.webRtc.joinRoom(this.parent.get('hash'));
+      this.webRtc.joinRoom(this.get('hash'));
       this.set('peerId', this.webRtc.connection.getSessionid());
+    });
+
+    this.webRtc.on('channelMessage', (peer, label, data) => {
+      if (data.type === 'setDisplayName') {
+        let peers = this.get('peers'),
+          p = peers.find(function (p) { return p.id === peer.id; });
+        p.nick = data.payload;
+        this.set('peers', peers);
+        console.log(data);
+      }
     });
 
     this.webRtc.on('createdPeer', (peer) => {
@@ -95,6 +105,13 @@ let Component = Ractive.extend({
           }
         });
         peer.sendFile(file);
+      },
+
+      nickTyped (evt) {
+        if (evt.original.keyCode === 13) {
+          this.webRtc.sendDirectlyToAll(this.get('hash'), 'setDisplayName',
+            this.get('peerId'));
+        }
       }
     });
   },
@@ -103,6 +120,7 @@ let Component = Ractive.extend({
     return  {
       message: '',
       messages: [],
+      peerId: '...',
       peers: [],
       files: []
     };

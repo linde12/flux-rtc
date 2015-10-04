@@ -12,7 +12,7 @@
     <h2>No other peers connected</h2>
   {{/if}}
   <div class="you-container">
-    You ({{peerId || '...'}})
+    You (<input on-keyup="nickTyped" type="text" value="{{peerId}}" />)
   </div>
   {{#each peers}}
     <div class="peer-container">
@@ -20,7 +20,7 @@
         <div style="width:{{transferPercentage}}%;" class="upload-bar"></div>
       {{/if}}
 
-      <div class="id"> {{id}} </div>
+      <div class="id"> {{nick || id}} </div>
       <div class="buttons">
         <label on-click="mute:{{id}}"><i class="ion-ios-mic-outline"></i></label>
         <label for="fileupload{{id}}"><i class="ion-ios-cloud-upload-outline"></i></label>
