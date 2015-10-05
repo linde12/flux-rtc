@@ -12,7 +12,7 @@
     <h2>No other peers connected</h2>
   {{/if}}
   <div class="you-container">
-    You (<input on-keyup="nickTyped" type="text" value="{{peerId}}" />)
+    You <input on-keyup="nickTyped" type="text" value="{{peerId}}" />
   </div>
   {{#each peers}}
     <div class="peer-container">
@@ -27,7 +27,7 @@
         <input on-change="fileSelected:{{id}}" type="file" id="fileupload{{id}}" value="Select file" />
       </div>
       <div class="upload-container">
-      {{#if transferPercentage && transferPercentage !== 0  }}
+      {{ #if transferPercentage && transferPercentage !== 0 }}
         <div class="upload-text">
           Downloading file {{ fileData.name }}
         </div>
@@ -41,9 +41,11 @@
     </div>
   {{/each}}
 
+  <div class="message-wrapper">
   {{#each messages}}
     {{nick}}: {{message}}<br />
   {{/each}}
+  </div>
   <br />
-  <input on-keyup="text" type="text" value="{{message}}" />
+  <input class="message-input" on-keyup="text" type="text" value="{{message}}" placeholder="Enter to send..." />
 </div>
