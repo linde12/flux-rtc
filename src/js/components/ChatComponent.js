@@ -39,6 +39,9 @@ let Component = Ractive.extend({
             peer.sendDirectly(this.get('hash'), 'setDisplayName', nick);
           }
           break;
+        case 'chat':
+          this.push('messages', data.payload);
+          break;
       }
     });
 
@@ -84,12 +87,12 @@ let Component = Ractive.extend({
     this.on({
       text (evt) {
         if (evt.original.keyCode === 13) {
-          let message = this.get('message');
+          let message = {
+            nick: this.get('peerId'),
+            message: this.get('message')
+          };
           this.push('messages', message);
-          if (message === 'dc') {
-            this.peer.disconnect();
-          }
-          this.peer.sendAll(message);
+          this.webRtc.sendDirectlyToAll(this.get('hash'), 'chat', message);
           this.set('message', '');
         }
       },

@@ -40,4 +40,10 @@
       </div>
     </div>
   {{/each}}
+
+  {{#each messages}}
+    {{nick}}: {{message}}<br />
+  {{/each}}
+  <br />
+  <input on-keyup="text" type="text" value="{{message}}" />
 </div>
