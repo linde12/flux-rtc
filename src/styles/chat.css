@@ -1,18 +1,22 @@
-
-
 .chat-wrapper {
-    display: block;
-    font-family: 'Work Sans', sans-serif;
-    margin: 0 auto;
-    padding: 5em 0;
-    text-align: center;
+
 }
 
-.chat-wrapper * {
+.peers-wrapper {
+    display: inline-block;
+    font-family: 'Work Sans', sans-serif;
+    margin: 20vh auto;
+    padding: 5em 0;
+    text-align: center;
+    width: 100%;
+}
+
+.peers-wrapper * {
     font-family: 'Work Sans', sans-serif;
 }
 
 .peer-container, .you-container {
+    font-family: 'Work Sans', sans-serif;
     display: block;
     background-color: #2C3E50;
     margin: 0.5em auto;
@@ -29,7 +33,8 @@
 .you-container input {
     float: left;
     width:85%;
-    border:1px solid #0F75B9;
+    /*border:1px solid #0F75B9;*/
+    border: none;
     padding: 0.1em 0.2em;
     background: none;
     border-radius: 5px;
@@ -103,30 +108,77 @@
 }
 
 .message-wrapper {
-  text-align: left;
-  min-height: 300px;
-  max-height:300px;
-  max-width: 705px;
-  overflow-y: scroll;
-  padding:1em;
-  border:1px solid gray;
-  margin: 1em auto;
-  border-radius: 5px;
-  width:66%;
+    padding: 0 3em;
+}
+
+.message-box {
+    font-family: 'Work Sans', sans-serif;
+    text-align: left;
+    min-height: 300px;
+    max-height:300px;
+    overflow-y: scroll;
+    padding:1em 1em 1em 0;
+    border-radius: 5px;
+    width:101%;
 }
 
 .message-input {
-  width: 80%;
-  max-width: 720px;
-  padding: 0.8em;
-  border: 1px solid gray;
-  border-radius: 4px;
+    width: 100%;
+    max-width: 720px;
+    padding: 0.8em;
+    border: none;
+    border-radius: 4px;
 }
 
-/*
-@media (max-width: 48em) {
-    .message-wrapper {
-        height:50vh;
-    }
+.message-input:focus {
+    outline: none;
 }
-*/
+
+.message-entry {
+    padding: 1em 0em;
+    border-bottom: 1px solid #ded;
+    width: 100%;
+}
+
+.message-entry b {
+    color: #3498DB;
+    display: block;
+}
+
+.message-text {
+    padding-left: 1.9em;
+}
+
+.message-timestamp {
+    float:right;
+    margin-top: -1.2em;
+    color: #ccc;
+}
+
+.message-timestamp:after {
+    clear: both;
+}
+
+
+
+/* Chat scroll style */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: white;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(0,0,0,0.2);
+}

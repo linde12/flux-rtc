@@ -7,13 +7,14 @@
   <input type="text" class="text" placeholder="Message..."/>
 </div>
 -->
-<div class="pure-u-1 pure-u-lg-2-3 chat-wrapper">
-  {{#if peers.length === 0}}
-    <h2>No other peers connected</h2>
-  {{/if}}
+<div class="pure-g peers-wrapper">
+<div class="pure-u-1 pure-u-lg-1-3 chat-wrapper">
   <div class="you-container">
     You <input on-keyup="nickTyped" type="text" value="{{peerId}}" />
   </div>
+  {{#if peers.length === 0}}
+    <h2>No other peers connected</h2>
+  {{/if}}
   {{#each peers}}
     <div class="peer-container">
       {{#if transferPercentage && transferPercentage !== 0 }}
@@ -40,12 +41,20 @@
       </div>
     </div>
   {{/each}}
-
-  <div class="message-wrapper">
+</div>
+<div class="message-wrapper pure-u-lg-1-3">
+  <div class="message-box">
   {{#each messages}}
-    {{nick}}: {{message}}<br />
+    <div class="message-entry">
+      <b><i class="ion-record" style="padding-right:1em;color:#bbb;"></i>{{nick}}</b>
+      <div class="message-timestamp">{{ getTimeStamp() }}</div>
+      <div class="message-text">
+        {{{message}}}
+      </div>
+    </div>
   {{/each}}
   </div>
   <br />
   <input class="message-input" on-keyup="text" type="text" value="{{message}}" placeholder="Enter to send..." />
+  </div>
 </div>

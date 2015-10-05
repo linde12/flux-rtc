@@ -1,6 +1,8 @@
 import Ractive from 'ractive';
 import Template from '../templates/ChatTemplate.html';
 import SimpleWebRTC from 'simplewebrtc';
+import AutoLinker from 'autolinker';
+import striptags from 'striptags';
 import DesktopNotification from '../util/notify';
 
 let Component = Ractive.extend({
@@ -31,7 +33,8 @@ let Component = Ractive.extend({
         case 'greetings':
           new DesktopNotification({
             title: 'Peer connected',
-            body: 'A peer has connected to #' + this.get('hash')
+            body: 'A peer has connected to #' + this.get('hash'),
+            icon: 'https://avatars1.githubusercontent.com/u/6190190?v=3&s=96g'
           });
           let nick = this.get('peerId');
 
@@ -40,6 +43,7 @@ let Component = Ractive.extend({
           }
           break;
         case 'chat':
+          new Audio('http://soundbible.com/grab.php?id=1443&type=wav').play();
           this.push('messages', data.payload);
           break;
       }
@@ -87,9 +91,14 @@ let Component = Ractive.extend({
     this.on({
       text (evt) {
         if (evt.original.keyCode === 13) {
+
+          let msg = this.get('message');
+          msg = striptags(msg);
+          msg = AutoLinker.link(msg);
+
           let message = {
             nick: this.get('peerId'),
-            message: this.get('message')
+            message: msg
           };
           this.push('messages', message);
           this.webRtc.sendDirectlyToAll(this.get('hash'), 'chat', message);
@@ -124,7 +133,13 @@ let Component = Ractive.extend({
       messages: [],
       peerId: '...',
       peers: [],
-      files: []
+      files: [],
+      getTimeStamp () {
+        let d = new Date();
+        let hours = d.getHours();
+        let prefix = hours < 10 ? '0' : '';
+        return prefix + hours + ':' + d.getMinutes();
+      }
     };
   }
 });
