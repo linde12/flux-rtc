@@ -33,6 +33,11 @@ let Component = Ractive.extend({
             title: 'Peer connected',
             body: 'A peer has connected to #' + this.get('hash')
           });
+          let nick = this.get('peerId');
+
+          if (nick) {
+            peer.sendDirectly(this.get('hash'), 'setDisplayName', nick);
+          }
           break;
       }
     });
@@ -40,7 +45,7 @@ let Component = Ractive.extend({
     this.webRtc.on('joinedRoom', () => {
       setTimeout(() => {
         this.webRtc.sendDirectlyToAll(this.get('hash'), 'greetings', {});
-      }, 500);
+      }, 1000);
     });
 
     this.webRtc.on('createdPeer', (peer) => {
