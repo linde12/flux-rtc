@@ -8,7 +8,7 @@ import DesktopNotification from '../util/notify';
 let Component = Ractive.extend({
   template: Template,
   oninit () {
-    let audio = new Audio('res/audio/msg.ogg');
+    let audio = new Audio('res/audio/msg.mp3');
     this.webRtc = new SimpleWebRTC({
       autoRequestMedia: true,
       receiveMedia: {
