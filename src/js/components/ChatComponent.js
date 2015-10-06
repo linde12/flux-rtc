@@ -80,12 +80,12 @@ let Component = Ractive.extend({
               return p.id === peer.id;
             });
           p.transferPercentage = 0;
-          this.set('peers', peers);
-
-          this.push('files', {
+          if (!p.files) p.files = [];
+          p.files.push({
             href: URL.createObjectURL(file),
             name: metadata.name
           });
+          this.set('peers', peers);
           receiver.channel.close();
         });
       });

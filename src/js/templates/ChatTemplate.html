@@ -17,8 +17,8 @@
   {{/if}}
   {{#each peers}}
     <div class="peer-container">
-      {{#if transferPercentage && transferPercentage !== 0 }}
-        <div style="width:{{transferPercentage}}%;" class="upload-bar"></div>
+      {{#if this.transferPercentage && this.transferPercentage !== 0 }}
+        <div style="width:{{this.transferPercentage}}%;" class="upload-bar"></div>
       {{/if}}
 
       <div class="id"> {{nick || id}} </div>
@@ -28,12 +28,12 @@
         <input on-change="fileSelected:{{id}}" type="file" id="fileupload{{id}}" value="Select file" />
       </div>
       <div class="upload-container">
-      {{ #if transferPercentage && transferPercentage !== 0 }}
+      {{ #if this.transferPercentage && this.transferPercentage !== 0 }}
         <div class="upload-text">
-          Downloading file {{ fileData.name }}
+          Downloading file {{ this.fileData.name }}
         </div>
       {{/if}}
-      {{#each files}}
+      {{#each this.files}}
         <div class="upload-text">
           <a href="{{href}}" download="{{name}}">{{name}} <i class="ion-android-arrow-down icon"></i></a>
         </div>
