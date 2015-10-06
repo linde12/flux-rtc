@@ -8,6 +8,7 @@ import DesktopNotification from '../util/notify';
 let Component = Ractive.extend({
   template: Template,
   oninit () {
+    let audio = new Audio('res/audio/msg.ogg');
     this.webRtc = new SimpleWebRTC({
       autoRequestMedia: true,
       receiveMedia: {
@@ -34,7 +35,7 @@ let Component = Ractive.extend({
           new DesktopNotification({
             title: 'Peer connected',
             body: 'A peer has connected to #' + this.get('hash'),
-            icon: 'https://avatars1.githubusercontent.com/u/6190190?v=3&s=96g'
+            icon: 'res/img/notification_icon.png'
           });
           let nick = this.get('peerId');
 
@@ -43,13 +44,14 @@ let Component = Ractive.extend({
           }
           break;
         case 'chat':
-          new Audio('http://soundbible.com/grab.php?id=1443&type=wav').play();
+          audio.play();
           this.push('messages', data.payload);
           break;
       }
     });
 
     this.webRtc.on('joinedRoom', () => {
+      // Peers haven't been created yet... THIS UGLY
       setTimeout(() => {
         this.webRtc.sendDirectlyToAll(this.get('hash'), 'greetings', {});
       }, 1000);
@@ -91,7 +93,6 @@ let Component = Ractive.extend({
     this.on({
       text (evt) {
         if (evt.original.keyCode === 13) {
-
           let msg = this.get('message');
           msg = striptags(msg);
           msg = AutoLinker.link(msg);

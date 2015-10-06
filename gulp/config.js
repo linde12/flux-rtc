@@ -25,6 +25,10 @@ module.exports = {
     src: src + '/fonts/**/*',
     dest: dest + '/fonts'
   },
+  res: {
+    src: src + '/res/**/*',
+    dest: dest + '/res'
+  },
   browserify: {
     settings: {
       transform: ['stringify', 'babelify']
