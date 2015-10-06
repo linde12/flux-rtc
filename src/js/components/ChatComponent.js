@@ -46,6 +46,7 @@ let Component = Ractive.extend({
         case 'chat':
           audio.play();
           this.push('messages', data.payload);
+          this.nodes.chat.scrollTop = this.nodes.chat.scrollHeight;
           break;
       }
     });
@@ -104,6 +105,7 @@ let Component = Ractive.extend({
           this.push('messages', message);
           this.webRtc.sendDirectlyToAll(this.get('hash'), 'chat', message);
           this.set('message', '');
+          this.nodes.chat.scrollTop = this.nodes.chat.scrollHeight;
         }
       },
 
