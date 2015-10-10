@@ -23,7 +23,7 @@
 
       <div class="id"> {{nick || id}} </div>
       <div class="buttons">
-        <label on-click="mute:{{id}}"><i class="ion-ios-mic-outline"></i></label>
+        <!--<label on-click="mute:{{this}}"><i class="ion-ios-mic-outline"></i></label>-->
         <label for="fileupload{{id}}"><i class="ion-ios-cloud-upload-outline"></i></label>
         <input on-change="fileSelected:{{id}}" type="file" id="fileupload{{id}}" value="Select file" />
       </div>

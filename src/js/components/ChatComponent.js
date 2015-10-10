@@ -24,6 +24,9 @@ let Component = Ractive.extend({
     });
 
     this.webRtc.on('channelMessage', (peer, label, data) => {
+      if (data.type.indexOf('disconnect')) {
+        console.log(data);
+      }
       switch (data.type) {
         case 'setDisplayName':
           let peers = this.get('peers'),
@@ -49,6 +52,15 @@ let Component = Ractive.extend({
           this.nodes.chat.scrollTop = this.nodes.chat.scrollHeight;
           break;
       }
+    });
+
+    this.webRtc.on('peerStreamRemoved', () => {
+      new DesktopNotification({
+        title: 'Peer disconnected',
+        body: 'A peer has disconnected from #' + this.get('hash'),
+        icon: 'res/img/notification_icon.png'
+      });
+      this.set('peers', this.webRtc.getPeers());
     });
 
     this.webRtc.on('joinedRoom', () => {
@@ -126,6 +138,10 @@ let Component = Ractive.extend({
           this.webRtc.sendDirectlyToAll(this.get('hash'), 'setDisplayName',
             this.get('peerId'));
         }
+      },
+
+      mute (event, peer) {
+        this.webRtc.mute(peer);
       }
     });
   },
