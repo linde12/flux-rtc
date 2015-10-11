@@ -153,11 +153,14 @@ let Component = Ractive.extend({
       peerId: '...',
       peers: [],
       files: [],
-      getTimeStamp () {
-        let d = new Date();
-        let hours = d.getHours();
-        let prefix = hours < 10 ? '0' : '';
-        return prefix + hours + ':' + d.getMinutes();
+      getTimestamp () {
+        let date = new Date(),
+          hours = date.getHours(),
+          minutes = date.getMinutes();
+        hours = hours < 10 ? '0' + hours : hours;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        return hours + ':' + minutes;
       }
     };
   }

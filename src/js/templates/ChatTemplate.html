@@ -48,13 +48,13 @@
       <h1>Chat</h1>
       <div class="pure-u-1 chat-box">
 
-        <div class="chat-start-message">Connected to chat at {{getTimeStamp()}}.</div>
+        <div class="chat-start-message">Connected to chat at {{getTimestamp()}}.</div>
 
         {{#each messages}}
           <div class="message-container">
             <div class="icon"><i class="ion-ios-chatboxes-outline"></i></div>
             <div class="id">{{nick || id}}</div>
-            <div class="timestamp">{{ getTimeStamp() }}</div>
+            <div class="timestamp">{{getTimestamp()}}</div>
             <div class="message">
               {{{message}}}
             </div>
