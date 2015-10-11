@@ -1,12 +1,83 @@
-<!--<div class="message-wrapper pure-u-1 pure-u-lg-1-5">
-  <div class="message-content">
-    <div class="chat-entry-other"> hello! </div>
-    <div class="chat-entry-you"> hi! </div>
+<div class="pure-g">
+  <div class="pure-u-1 pure-u-md-1-3 peers-wrapper">
+    <div class="peers-container">
+      <button class="back-btn"><i class="ion-ios-arrow-thin-left"></i>Back to main</button>
+      {{#if peers.length === 0}}
+        <h1>No other peers connected</h1>
+      {{else}}
+        <h1>Connected Peers</h1>
+      {{/if}}
+
+      <div class="peer">
+        <div class="id">You: <input on-keyup="nickTyped" type="text" value="{{peerId}}" /></div>
+      </div>
+
+      {{#each peers}}
+        <div class="peer">
+          <div class="id">{{nick || id}}</div>
+          <div class="buttons">
+            <label for="fileupload{{id}}"><i class="ion-ios-cloud-upload-outline"></i></label>
+            <input on-change="fileSelected:{{id}}" type="file" id="fileupload{{id}}" value="Select file" />
+          </div>
+
+
+          {{ #if this.transferPercentage && this.transferPercentage !== 0 }}
+            <div style="display: block; width: 100%; color: #2C3E50;padding-top:5px;">
+              Downloading file {{this.fileData.name}}...
+            </div>
+            <div style="width:{{this.transferPercentage}}%;height:5px;background-color:#E74C3C;"></div>
+          {{/if}}
+          {{#each this.files}}
+            <a href="{{href}}" download="{{name}}">{{name}} <i class="ion-android-arrow-down icon"></i></a>
+          {{/each}}
+        </div>
+      {{/each}}
+    </div>
   </div>
 
-  <input type="text" class="text" placeholder="Message..."/>
+  <div class="pure-u-1 pure-u-md-2-3 chat-wrapper">
+    <div class="pure-u-1 logo-wrapper" style="height: 100px;">
+      <div class="bar-1"></div>
+      <div class="bar-2"></div>
+      <div class="bar-3"></div>
+      <div class="bar-5"></div>
+      <div class="bar-4"></div>
+    </div>
+
+    <div class="pure-u-11-12 pure-u-lg-11-12 pure-u-xl-3-5 chat-container">
+      <h1>Chat</h1>
+      <div class="pure-u-1 chat-box">
+
+        <div class="chat-start-message">Connected to chat at {{getTimeStamp()}}.</div>
+
+        {{#each messages}}
+          <div class="message-container">
+            <div class="icon"><i class="ion-ios-chatboxes-outline"></i></div>
+            <div class="id">{{nick || id}}</div>
+            <div class="timestamp">{{ getTimeStamp() }}</div>
+            <div class="message">
+              {{{message}}}
+            </div>
+          </div>
+        {{/each}}
+
+      </div>
+      <input type="text" class="message-input" on-keyup="text" value="{{message}}" placeholder="Enter to send..." />
+    </div>
+
+    <footer class="pure-u-11-12 pure-u-md-3-5 pure-u-sm-2-3 footer">A WebRTC based P2P chat client created by Oscar Linde and Edvin Havic. <a href="https://github.com/linde12/flux-rtc"><i class="ion-social-github"></i></a> </footer>
+  </div>
 </div>
--->
+
+
+
+
+
+
+
+
+
+
 <div class="pure-g peers-wrapper">
 <div class="pure-u-1 pure-u-lg-1-3 chat-wrapper">
   <div class="you-container">
