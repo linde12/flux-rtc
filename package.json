@@ -15,6 +15,7 @@
     "babel-eslint": "^3.1.20",
     "babelify": "^6.3.0",
     "browserify": "^10.2.4",
+    "escape-html": "^1.0.3",
     "eslint": "^0.24.0",
     "flux": "^2.0.3",
     "gulp": "^3.8.7",
@@ -27,7 +28,6 @@
     "require-dir": "^0.3.0",
     "simplewebrtc": "^1.19.1",
     "stringify": "^3.1.0",
-    "striptags": "^2.0.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.3"
