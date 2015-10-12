@@ -85,9 +85,6 @@ let Component = Ractive.extend({
       this.set('peerId', this.webRtc.connection.getSessionid());
     });
     this.webRtc.on('channelMessage', (peer, label, data) => {
-      if (data.type.indexOf('disconnect') !== -1) {
-        console.log(data);
-      }
       switch (data.type) {
         case 'setDisplayName':
           let peers = this.get('peers'),
