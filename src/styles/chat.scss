@@ -25,7 +25,7 @@
 }
 
 .peers-container h1 {
-  padding-top: 2em;
+  padding-top: 1.65em;
   color: #2C3E50;
   font-family: 'Work Sans', sans-serif;
 }
@@ -66,8 +66,10 @@
 
 .peer .id > input[type="text"] {
   font-style: 'Work Sans', sans-serif;
-  padding: 0.7em 0.5em 0.3em 0.5em;
-  width: 70%;
+  padding: 0.1em 0.1em;
+  width: 80%;
+  background-color: #ECF0F1;
+  border: 1px solid #333;
   float: right;
 }
 
@@ -95,6 +97,26 @@
   cursor: pointer;
 }
 
+.download-link {
+  display:block;
+  text-decoration: none;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.download-bar {
+  height:5px;
+  background-color:#E74C3C;
+  margin: 0;
+}
+
+.download-text {
+  font-family: 'Work Sans', sans-serif;
+  display: block;
+  width: 100%;
+  color: #2C3E50;
+  padding-top:5px;
+}
+
 .chat-wrapper {
   min-height: 100vh;
   background-color: #2C3E50;
@@ -118,8 +140,8 @@
 }
 
 .chat-box {
-  height: 60vh;
-  max-height: 60vh;
+  height: 50vh;
+  max-height: 50vh;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -172,7 +194,7 @@
 }
 
 .message-input {
-  width: 100%;
+  width: 97.5%;
   margin-top: 0.5em;
   background-color: rgba(255,255,255,.7);
   border: 1px solid #0B2434;
@@ -187,10 +209,10 @@
 
 .footer {
   color: #0D2636;
-  position: absolute;
   text-align: right;
-  bottom: 1em;
-  right: 2em;
+  margin-top: -3em;
+  height: 3em;
+  padding-right: 1em;
 }
 
 .footer i {
@@ -207,13 +229,18 @@
   color: #0D2636;;
 }
 
-
-
+.logo-text {
+  padding-bottom: .5em;
+  color: #eee;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5em;
+}
 
 .logo-wrapper {
   text-align: right;
   margin-left: -1em;
   margin-top: 1em;
+  height: 100px;
 }
 
 /* BEGIN LOGO ANIMATION */
@@ -268,6 +295,7 @@
 
 .bar-4 {
   top: -30px;
+  margin-right: 1.9em;
   animation: ease-in-out bar-4 15s infinite;
 }
 
