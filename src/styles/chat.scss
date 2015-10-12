@@ -161,6 +161,12 @@
   font-family: 'Work Sans', sans-serif;
 }
 
+.message a {
+  color: #2980B9;
+  &:hover, &:visited {
+    color: #2980B9;
+  }
+}
 .message-container .icon {
   display: inline-block;
   font-size: 2.4em;

@@ -40,7 +40,9 @@ let Component = Ractive.extend({
         if (evt.original.keyCode === 13) {
           let msg = this.get('message');
           msg = escape(msg);
-          msg = AutoLinker.link(msg);
+          msg = AutoLinker.link(msg, {
+            hashtag: 'twitter'
+          });
 
           let message = {
             nick: this.get('peerId'),
